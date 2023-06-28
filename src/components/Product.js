@@ -1,13 +1,14 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Program: App.js
-// Description: This is the root component file. It will be treated as the home page for the entire application.
+// Program: Product.js
+// Description: Will display each product for the games object that the user wants to buy.
 // Notes: N/A
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// App(): The root component container (Homepage).
-export function App() {
-  return (
-    <div className="app-component-container">
-    </div>
-  );
+// Product(): The product component container.
+export const Product = () => {
+    return (
+        <div>
+            <h1>Products</h1>
+        </div>
+    );
 }
