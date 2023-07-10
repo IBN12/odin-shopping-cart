@@ -6,7 +6,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { games } from "../utils/games";
-import { category } from "../utils/category";
+import { category } from "../utils/category";;
 
 // GameCategory(): The game category component container.
 export const GameCategory = () =>{

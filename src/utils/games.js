@@ -20,6 +20,11 @@ export const games = [
         cost: "49.99",
         image: horizonZeroDawn,
         id: uniqid(),
+        quantity: 0,
+        platforms: {
+            1: "PS4",
+            2: "PC",
+        }
     },
     {
         name: "Ghost of Tsushima",
@@ -27,6 +32,11 @@ export const games = [
         cost: "44.99",
         image: ghostOfTsushima,
         id: uniqid(),
+        quantity: 0,
+        platforms: {
+            1: "PS4",
+            2: "PS5",
+        }
     },
     {
         name: "Resident Evil 4 Remake",
@@ -34,6 +44,14 @@ export const games = [
         cost: "60.00",
         image: residentEvil4Remake,
         id: uniqid(),
+        quantity: 0,
+        platforms: {
+            1: "PS4",
+            2: "PS5",
+            3: "Xbox Series X",
+            4: "Xbox Series S",
+            5: "PC",
+        }
     },
     {
         name: "Dead Space Remake",
@@ -41,6 +59,13 @@ export const games = [
         cost: "60.00",
         image: deadSpaceRemake,
         id: uniqid(),
+        quantity: 0,
+        platforms: {
+            1: "PS5",
+            2: "Xbox Series X",
+            3: "Xbox Series S",
+            4: "PC",
+        }
     },
     {
         name: "Dead Island 2",
@@ -48,6 +73,15 @@ export const games = [
         cost: "60.00",
         image: deadIsland2,
         id: uniqid(),
+        quantity: 0,
+        platforms: {
+            1: "PS5",
+            2: "PS4",
+            3: "Xbox Series X",
+            4: "Xbox Series S",
+            5: "Xbox One",
+            6: "PC",
+        }
     },
     {
         name: "Street Fighter 6",
@@ -55,6 +89,14 @@ export const games = [
         cost: "60.00",
         image: streetFighter6,
         id: uniqid(),
+        quantity: 0,
+        platforms: {
+            1: "PS5",
+            2: "PS4",
+            3: "Xbox Series X",
+            4: "Xbox Series S",
+            5: "PC",
+        }
     },
     {
         name: "Tekken 8",
@@ -62,6 +104,13 @@ export const games = [
         cost: "60.00",
         image: tekken8,
         id: uniqid(),
+        quantity: 0,
+        platforms: {
+            1: "PS5",
+            2: "Xbox Series X",
+            3: "Xbox Series S",
+            4: "PC",
+        }
     },
     {
         name: "DNF Duel",
@@ -69,6 +118,13 @@ export const games = [
         cost: "49.99",
         image: dnfDuel,
         id: uniqid(),
+        quantity: 0,
+        platforms: {
+            1: "Nintendo Switch",
+            2: "PS5",
+            3: "PS4",
+            4: "PC",
+        }
     },
     {
         name: "King of Fighters",
@@ -76,6 +132,14 @@ export const games = [
         cost: "60.00",
         image: kingOfFighters,
         id: uniqid(),
+        quantity: 0,
+        platforms: {
+            1: "PS5", 
+            2: "PS4",
+            3: "Xbox Series X",
+            4: "Xbox Series S",
+            5: "PC" 
+        }
     },
     {
         name: "Guilty Gear Strive",
@@ -83,5 +147,13 @@ export const games = [
         cost: "39.99",
         image: guiltyGearStrive,
         id: uniqid(),
+        quantity: 0,
+        platforms: {
+            1: "PS5",
+            2: "PS4",
+            3: "Xbox Series X",
+            4: "Xbox Series S",
+            5: "Xbox One",
+        }
     }
 ]

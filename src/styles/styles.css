@@ -38,8 +38,10 @@ body{
     /* |Main Navigation Section| */
     .main-navigation-component-container{
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        /* grid-template-columns: repeat(3, 1fr); */
+        grid-template-columns: 120px auto auto;
         grid-template-rows: auto;
+        align-items: center;
         gap: 20px;
 
         border: 1px solid red;
@@ -65,8 +67,21 @@ body{
         text-decoration: none;
         font-family: army-of-darkness, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     }
-    .main-navigation-component-container > div > a:focus{ /* Note: May remove this feature and implement it with React Route instead. */
+    .main-navigation-component-container > div > a:focus{ /* Note: May remove this feature and implement it with React Router instead. */
         text-decoration: underline;
+    }
+
+    .main-navigation-component-container > div:nth-child(3), /* Search Icon | Cart Icon Containers */
+    .main-navigation-component-container > div:nth-child(4){ 
+        width: 40px;
+    }
+    .main-navigation-component-container > div > button{
+        background-color: inherit;
+        border: 1px solid rgba(0, 0, 0, 0);
+    }
+    .main-navigation-component-container > div > button > svg{
+        width: 100%;
+        height: 100%;
     }
 
     /* |Shopping Section| */
@@ -116,4 +131,157 @@ body{
     .game-category-component-container > div > a > p{ /* Name|Cost */
         text-align: start;
     }
+
+    /* |Product Section| */
+    .product-component-container{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 10px;
+
+        padding: 10px;
+    }
+    .product-component-container > div{
+        border: 1px solid green;
+    }
+    .product-component-container > div:nth-child(2){ /* Product Image Container */
+        height: 220px;
+    }
+    .product-component-container > div > img[src]{ /* Product Image */
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+    }
+
+    .product-component-container > div:nth-child(3){ /* Platform Choice Container */
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+    .product-component-container > div:nth-child(3) > button{ /* Platform Choice Buttons */
+        padding: 5px 15px 5px 15px;
+        border-radius: 10px;
+        border: 1px solid black;
+        background-color: inherit;
+        font-size: 18px;
+        font-weight: bold;
+        /* font-family: army-of-darkness, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; */
+    }
+    #product-platform-choose{
+        background-color: #fde68a;
+        border: 1px solid #fde68a;
+    }
+
+    /* Add To Bag Section */
+    .add-to-bag-component-container{   
+        display: flex;
+        flex-direction: column; 
+        align-items: center;
+        gap: 5px;
+
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        padding: 10px;
+        background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(100,43,115,1) 0%, rgba(4,0,4,1) 90% );
+        font-family: army-of-darkness, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        font-size: 20px;
+        letter-spacing: 3px;
+        overflow-y: scroll;
+    }
+    .add-to-bag-component-container > div{
+
+        border: 1px solid black;
+    }
+
+    .add-to-bag-component-container > div:nth-child(1){ /* Close Button Container (X)*/
+        display: flex;
+        justify-content: end;
+
+        width: 100%;
+    }
+    .add-to-bag-component-container > div > button{
+        height: 30px;
+        background: inherit;
+        border: 1px solid rgba(0, 0, 0, 0);
+    }
+    .add-to-bag-component-container > div > button > svg{
+        width: 100%;
+        height: 100%;
+        fill:#C04848;
+    }
+
+    .add-to-bag-component-container > div:nth-child(2){ /* Main Shopping Bag Title */
+        flex-basis: 15%;
+        color: #C04848;
+    }
+
+    .add-to-bag-component-container > div:nth-child(3){ /* Cart Image Container*/
+        width: 150px;
+        height: 150px;
+    }
+    .add-to-bag-component-container > div:nth-child(3) > svg{
+        width: 100%;
+        height: 100%;
+        fill:#C04848;
+    }
+
+    .product-section{ /* Main Product Section - For Products Added To Bag. */
+        padding: 10px;
+        color: #cbd5e1;
+    }
+
+    .product-section > div:nth-child(1){/* Product Details - (Image|Category|Cost|Name) */
+        display: flex;
+        gap: 5px;
+        
+        padding: 10px;
+        border: 1px solid blue;
+    }
+    .product-section > div:nth-child(1) > img[src]{
+        width: 100px;
+        height: 100px;
+        border-radius: 10px;
+    }
+
+    .product-count{ /* Product Count - (-|Quantity|+) */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        
+        padding: 10px;
+        border: 1px solid green;
+        margin: 3px;
+    }
+    .product-count > button{ 
+        background: inherit;
+        font-size: 25px;
+        border: 1px solid rgba(0, 0, 0, 0);
+        color:#C04848;
+    }
+
+    .checkout-section{ /* Checkout Section - Checkout (button) | Total Price */
+        display: flex;
+        gap: 15px;
+        align-items: center;
+
+        border: 1px solid lightcoral;
+        font-size: 20px;
+        padding: 5px;
+        color: #cbd5e1;
+    }
+    .checkout-section > button{
+        padding: 5px 15px 5px 15px;
+        font-size: 20px;
+        font-family: army-of-darkness, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        letter-spacing: 3px;
+        border: 1px solid #C04848;
+        border-radius: 10px;
+        background: inherit;
+        color: #C04848;
+    }
+
 }
