@@ -11,12 +11,24 @@ import { SaveProductId } from "../utils/save";
 import { addProductsToCart } from "../utils/addProductsToCart";
 import { removeEmptyProduct } from "../utils/removeEmptyProduct";
 
+// CountMod() Module: Will keep track of how many times the same product is added to the bag. 
+export const CountMod = (() => {
+    let count = 0;
+    return {count}
+})();
+
+// SameProductAddedToCartMod() Module: keeps track of the same product being added to the cart.  
+export const SameProductAddedToCartMod = (() => {
+    let sameProductAddedToCart = false;
+    
+    return {sameProductAddedToCart}
+})();
+
 // Product(): The product component container.
 export const Product = (props) => {
     const [productInfo, setProductInfo] = useState({});
     const [productPlatforms, setProductPlatforms] = useState([]);
     const [productPlatformClicked, setProductPlatformClicked] = useState(false);
-    const [differentGameAddedToCart, setDifferentGameAddedToCart] = useState(false)
     const {productId} = useParams();
     const {setDisplayAddToBag, cart, setCart, saveProductPlatform, setSaveProductPlatform, totalPrice, setTotalPrice} = props;
 
@@ -38,7 +50,22 @@ export const Product = (props) => {
                 setSaveProductPlatform(productPlatformsContainer.innerHTML); // Save the default product platform.
             } 
         }
-    }, [productId, productPlatforms.length, setSaveProductPlatform, productPlatformClicked, setTotalPrice]);
+
+        console.log("Items in Cart: ",cart.length); // Testing 
+
+        cart.forEach((obj) => {
+            if (obj.name === productId)
+            {
+                console.log(obj.name, " is in the cart"); // Testing
+                SameProductAddedToCartMod.sameProductAddedToCart = true;
+            }
+            else
+            {
+                SameProductAddedToCartMod.sameProductAddedToCart = false;
+            }
+        });
+        
+    }, [productId, productPlatforms.length, setSaveProductPlatform, productPlatformClicked, setTotalPrice, cart]);
 
     function platformChoice(e){
         const productPlatformsContainer = document.querySelectorAll('.product-component-container > div:nth-child(3) > button');
@@ -65,7 +92,7 @@ export const Product = (props) => {
 
         let tempCartArr = []
 
-        tempCartArr.push(addProductsToCart(productId, saveProductPlatform, cart, differentGameAddedToCart, totalPrice, setTotalPrice));
+        tempCartArr.push(addProductsToCart(productId, saveProductPlatform, cart, totalPrice, setTotalPrice, SameProductAddedToCartMod.sameProductAddedToCart));
         console.log("Temp Cart Array: ", tempCartArr);  // Testing
 
         removeEmptyProduct(tempCartArr);
@@ -74,7 +101,11 @@ export const Product = (props) => {
         setCart(cart.concat(tempCartArr));
         console.log("Real Cart Array: ", cart); // Testing
 
-        setDifferentGameAddedToCart(true);
+        // Note: If we add the same product to the cart, then we want to test if this product has the same platform. 
+        // If it does have the same platform then a empty product object will be returned and removed from the temporary cart array.
+        // If it doesn't have the same platform then a product slot for the same product with a different platform will be added to the cart. 
+
+        // setSameProductAddedToCart(true);
 
         setDisplayAddToBag(true);
     }

@@ -12,8 +12,6 @@ import { GameCategory } from "./components/GameCategory";
 import { Product } from "./components/Product";
 import { AddToBag } from "./components/AddToBag";
 
-import { games } from "./utils/games";
-
 import { useState } from "react";
 
 import './styles/styles.css';
@@ -24,6 +22,7 @@ export const RouteSwitch = () => {
     const [displayAddToBag, setDisplayAddToBag] = useState(false);
     const [saveProductPlatform, setSaveProductPlatform] = useState("");
     const [totalPrice, setTotalPrice] = useState(0);
+    const [sameProductAddedToCart, setSameProductAddedToCart] = useState(false);
 
     return (
         <HashRouter>

@@ -20,6 +20,7 @@ export const games = [
         cost: "49.99",
         image: horizonZeroDawn,
         id: uniqid(),
+        inCart: false,
         quantity: 0,
         platforms: {
             1: "PS4",
@@ -32,6 +33,7 @@ export const games = [
         cost: "44.99",
         image: ghostOfTsushima,
         id: uniqid(),
+        inCart: false,
         quantity: 0,
         platforms: {
             1: "PS4",
@@ -44,6 +46,7 @@ export const games = [
         cost: "60.00",
         image: residentEvil4Remake,
         id: uniqid(),
+        inCart: false,
         quantity: 0,
         platforms: {
             1: "PS4",
@@ -59,6 +62,7 @@ export const games = [
         cost: "60.00",
         image: deadSpaceRemake,
         id: uniqid(),
+        inCart: false,
         quantity: 0,
         platforms: {
             1: "PS5",
@@ -73,6 +77,7 @@ export const games = [
         cost: "60.00",
         image: deadIsland2,
         id: uniqid(),
+        inCart: false,
         quantity: 0,
         platforms: {
             1: "PS5",
@@ -89,6 +94,7 @@ export const games = [
         cost: "60.00",
         image: streetFighter6,
         id: uniqid(),
+        inCart: false,
         quantity: 0,
         platforms: {
             1: "PS5",
@@ -104,6 +110,7 @@ export const games = [
         cost: "60.00",
         image: tekken8,
         id: uniqid(),
+        inCart: false,
         quantity: 0,
         platforms: {
             1: "PS5",
@@ -117,6 +124,7 @@ export const games = [
         category: "Fighting",
         cost: "49.99",
         image: dnfDuel,
+        inCart: false,
         id: uniqid(),
         quantity: 0,
         platforms: {
@@ -131,6 +139,7 @@ export const games = [
         category: "Fighting",
         cost: "60.00",
         image: kingOfFighters,
+        inCart: false,
         id: uniqid(),
         quantity: 0,
         platforms: {
@@ -146,6 +155,7 @@ export const games = [
         category: "Fighting",
         cost: "39.99",
         image: guiltyGearStrive,
+        inCart: false,
         id: uniqid(),
         quantity: 0,
         platforms: {
