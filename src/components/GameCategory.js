@@ -26,6 +26,7 @@ export const GameCategory = () =>{
             setCurrentCategory(category(games, categoryId)); 
             setDisplayDefaultShoppingList(false);
         }
+
     }, [setDisplayDefaultShoppingList, categoryId]);
 
     return(

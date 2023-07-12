@@ -11,6 +11,7 @@ import { Shopping } from "./components/Shopping";
 import { GameCategory } from "./components/GameCategory";
 import { Product } from "./components/Product";
 import { AddToBag } from "./components/AddToBag";
+import { SearchField } from "./components/SearchField";
 
 import { useState } from "react";
 
@@ -20,13 +21,28 @@ import './styles/styles.css';
 export const RouteSwitch = () => {
     const [cart, setCart] = useState([]); 
     const [displayAddToBag, setDisplayAddToBag] = useState(false);
+    const [displaySearchField, setDisplaySearchField] = useState(false);
     const [saveProductPlatform, setSaveProductPlatform] = useState("");
     const [totalPrice, setTotalPrice] = useState(0);
-    const [sameProductAddedToCart, setSameProductAddedToCart] = useState(false);
+    const [userSearch, setUserSearch] = useState("");
+    const [displayCartDashboardQuantity, setDisplayCartDashboardQuantity] = useState(false);
+    const [cartDashboardQuantity, setCartDashboardQuantity] = useState(0);
 
     return (
         <HashRouter>
-            <MainNavigation />
+            <MainNavigation
+                setDisplayAddToBag={setDisplayAddToBag}
+                setDisplaySearchField={setDisplaySearchField}
+                cartDashboardQuantity={cartDashboardQuantity}
+                displayCartDashboardQuantity={displayCartDashboardQuantity}
+            />
+
+            <SearchField
+                displaySearchField={displaySearchField}
+                setDisplaySearchField={setDisplaySearchField}
+                userSearch={userSearch}
+                setUserSearch={setUserSearch}
+            />
 
             <AddToBag 
                 cart={cart}
@@ -35,6 +51,9 @@ export const RouteSwitch = () => {
                 setDisplayAddToBag={setDisplayAddToBag}
                 totalPrice={totalPrice}
                 setTotalPrice={setTotalPrice}
+                setDisplayCartDashboardQuantity={setDisplayCartDashboardQuantity}
+                cartDashboardQuantity={cartDashboardQuantity}
+                setCartDashboardQuantity={setCartDashboardQuantity}
             />
 
             <Routes>
@@ -53,6 +72,9 @@ export const RouteSwitch = () => {
                         setSaveProductPlatform={setSaveProductPlatform}
                         totalPrice={totalPrice}
                         setTotalPrice={setTotalPrice}
+                        setDisplayCartDashboardQuantity={setDisplayCartDashboardQuantity}
+                        cartDashboardQuantity={cartDashboardQuantity}
+                        setCartDashboardQuantity={setCartDashboardQuantity}
                     />} 
                 />
             </Routes>

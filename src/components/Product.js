@@ -11,12 +11,6 @@ import { SaveProductId } from "../utils/save";
 import { addProductsToCart } from "../utils/addProductsToCart";
 import { removeEmptyProduct } from "../utils/removeEmptyProduct";
 
-// CountMod() Module: Will keep track of how many times the same product is added to the bag. 
-export const CountMod = (() => {
-    let count = 0;
-    return {count}
-})();
-
 // SameProductAddedToCartMod() Module: keeps track of the same product being added to the cart.  
 export const SameProductAddedToCartMod = (() => {
     let sameProductAddedToCart = false;
@@ -30,7 +24,16 @@ export const Product = (props) => {
     const [productPlatforms, setProductPlatforms] = useState([]);
     const [productPlatformClicked, setProductPlatformClicked] = useState(false);
     const {productId} = useParams();
-    const {setDisplayAddToBag, cart, setCart, saveProductPlatform, setSaveProductPlatform, totalPrice, setTotalPrice} = props;
+    const {setDisplayAddToBag, 
+            cart, 
+            setCart, 
+            saveProductPlatform, 
+            setSaveProductPlatform, 
+            totalPrice, 
+            setTotalPrice, 
+            setDisplayCartDashboardQuantity,
+            cartDashboardQuantity,
+            setCartDashboardQuantity} = props;
 
     useEffect(() => {
         SaveProductId.saveProductId = productId;
@@ -53,6 +56,7 @@ export const Product = (props) => {
 
         console.log("Items in Cart: ",cart.length); // Testing 
 
+        // Test if the user is adding the same the product to the cart.
         cart.forEach((obj) => {
             if (obj.name === productId)
             {
@@ -92,7 +96,16 @@ export const Product = (props) => {
 
         let tempCartArr = []
 
-        tempCartArr.push(addProductsToCart(productId, saveProductPlatform, cart, totalPrice, setTotalPrice, SameProductAddedToCartMod.sameProductAddedToCart));
+        tempCartArr.push(addProductsToCart(productId, 
+            saveProductPlatform, 
+            cart, 
+            totalPrice, 
+            setTotalPrice, 
+            SameProductAddedToCartMod.sameProductAddedToCart, 
+            setDisplayCartDashboardQuantity,
+            cartDashboardQuantity,
+            setCartDashboardQuantity
+            ));
         console.log("Temp Cart Array: ", tempCartArr);  // Testing
 
         removeEmptyProduct(tempCartArr);
@@ -100,12 +113,6 @@ export const Product = (props) => {
         // setCart(cart.concat(addProductsToCart(productId, saveProductPlatform, cart, differentGameAddedToCart, setNoProductReturned)));
         setCart(cart.concat(tempCartArr));
         console.log("Real Cart Array: ", cart); // Testing
-
-        // Note: If we add the same product to the cart, then we want to test if this product has the same platform. 
-        // If it does have the same platform then a empty product object will be returned and removed from the temporary cart array.
-        // If it doesn't have the same platform then a product slot for the same product with a different platform will be added to the cart. 
-
-        // setSameProductAddedToCart(true);
 
         setDisplayAddToBag(true);
     }

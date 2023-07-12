@@ -11,17 +11,32 @@ import { useState } from "react";
 // addToBag Variant: non-primitive obj
 const addToBag = {
     hidden: { x: "100%" }, // This means it is 100 percent hidden off the screen.
-    visible: { x: "0", opacity: 0.99 },
+    visible: { x: 0, opacity: 0.99 },
 };
 
 // AddToBag(): Products choosen by the user will shown here.
-export const AddToBag = ({cart, setCart, displayAddToBag, setDisplayAddToBag, totalPrice, setTotalPrice}) => {
+export const AddToBag = ({
+    cart, 
+    setCart, 
+    displayAddToBag, 
+    setDisplayAddToBag, 
+    totalPrice, 
+    setTotalPrice, 
+    setDisplayCartDashboardQuantity,
+    cartDashboardQuantity,
+    setCartDashboardQuantity}) => {
     const [productQuantity, setProductQuantity] = useState(0); // Using state in order for the component to update during the product quantity increase and decrease
     const location = useLocation();
     
     // closeAddToBag(): Closes the add to bag screen.
     function closeCart(){
         setDisplayAddToBag(false);
+
+        // Remove the cart quantity dashboard if the cart is empty.
+        if (cartDashboardQuantity === 0)
+        {
+            setDisplayCartDashboardQuantity(false);
+        }
     }
 
     // decreaseQuantity(): Decreases the quantity of the product in the cart.
@@ -37,6 +52,9 @@ export const AddToBag = ({cart, setCart, displayAddToBag, setDisplayAddToBag, to
         // Decrease Total Price
         setTotalPrice((totalPrice - parseFloat(obj.cost)));
 
+        // Decrease the cart dashboard quantity
+        setCartDashboardQuantity(cartDashboardQuantity - 1);
+
         setProductQuantity(obj.quantity);
     }
 
@@ -46,6 +64,9 @@ export const AddToBag = ({cart, setCart, displayAddToBag, setDisplayAddToBag, to
 
         // Increase Total Price
         setTotalPrice(totalPrice + parseFloat(obj.cost));
+
+        // Increase the cart dashboard quantity
+        setCartDashboardQuantity(cartDashboardQuantity + 1);
 
         setProductQuantity(obj.quantity);
     }
