@@ -61,6 +61,9 @@ export const SearchField = (props) => {
                                 e.preventDefault();
                                 
                                 let searchFound = false;
+                                let userSearchArr = [];
+                                let indexArr = [];
+                                let userSearchCopy = "";
 
                                 if (displaySearchLink)
                                 {
@@ -71,11 +74,54 @@ export const SearchField = (props) => {
                                     setDisplaySearchNotFound(false);
                                 }
 
-                                games.forEach((obj, index) => {
-                                    if (obj.name === userSearch)
+                                // Convert items to the matching names in the system. 
+                                for(let i = 0; i < userSearch.length; i++)
+                                {
+                                    if (userSearch[i] === userSearch[0].toLowerCase() || userSearch[i] === userSearch[0].toUpperCase())
                                     {
-                                        console.log(userSearch, " is in the system."); // Testing
+                                        console.log(userSearch[i]); // Testing
+                                        userSearchArr.push(userSearch[i].toUpperCase());
+                                        console.log("User Search Array: ", userSearchArr); // Testing
+                                    }
+                                    else if (userSearch[i].includes(' '))
+                                    {
+                                        userSearchArr.push(userSearch[i]);
+                                        indexArr.push(userSearch[i + 1].toUpperCase());
+                                        console.log("Index Array: ", indexArr); // Testing
+                                    }
+                                    else if (userSearch[i] === userSearch[i].toUpperCase() || userSearch[i] === userSearch[i].toLowerCase())
+                                    {
+                                        userSearchArr.push(userSearch[i].toLowerCase());
+                                        console.log("User Search Array: ", userSearchArr); // Testing
+                                    }
+                                }
+
+                                // Replace the matching userSearchArr items with the items from indexArr:
+                                userSearchArr.forEach((item, index) => {
+                                    if (item === ' ')
+                                    {
+                                        console.log(userSearchArr[index + 1]);
+                                        indexArr.forEach((indexItem) => {
+                                            if (indexItem === userSearchArr[index + 1].toUpperCase())
+                                            {
+                                                userSearchArr[index + 1] = indexItem;
+                                            }
+                                        });
+                                    }
+                                });
+
+                                // convert userSearchArr to a string:
+                                userSearchCopy = userSearchArr.toString();
+                                userSearchCopy = userSearchCopy.replaceAll(',', '');
+
+                                // Test if the user search item is in the system:
+                                games.forEach((obj, index) => {
+                                    if (obj.name === userSearchCopy)
+                                    {
+                                        console.log(userSearchCopy, " is in the system."); // Testing
+                                        setUserSearch(userSearchCopy);
                                         setDisplaySearchLink(true);
+
                                         searchFound = true;
                                     }
 
@@ -83,8 +129,8 @@ export const SearchField = (props) => {
                                     {
                                         setDisplaySearchNotFound(true);
                                     }
-                                });
-                            }}>
+                                }); }}>
+
                                 <input type="text" placeholder="Search" onChange={e => {
                                     setUserSearch(e.target.value);
                                     if (displaySearchLink)
@@ -94,7 +140,8 @@ export const SearchField = (props) => {
                                     else if (displaySearchNotFound)
                                     {
                                         setDisplaySearchNotFound(false);
-                                    }}} />
+                                    }}} 
+                                />
                             </form>
                         </span>
 

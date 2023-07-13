@@ -94,9 +94,10 @@ export const Product = (props) => {
     function addToBag(){
         console.log("Adding Product To Bag."); // Testing
 
-        let tempCartArr = []
+        let tempCartArr = [];
 
-        tempCartArr.push(addProductsToCart(productId, 
+        tempCartArr.push(addProductsToCart(
+            productId, 
             saveProductPlatform, 
             cart, 
             totalPrice, 
@@ -111,6 +112,32 @@ export const Product = (props) => {
         removeEmptyProduct(tempCartArr);
 
         // setCart(cart.concat(addProductsToCart(productId, saveProductPlatform, cart, differentGameAddedToCart, setNoProductReturned)));
+        setCart(cart.concat(tempCartArr));
+        console.log("Real Cart Array: ", cart); // Testing
+
+        // setDisplayAddToBag(true);
+    }
+
+    function buyItNow(){
+        console.log("Buying The Product Now."); // Testing
+
+        let tempCartArr = [];
+
+        tempCartArr.push(addProductsToCart(
+            productId,
+            saveProductPlatform,
+            cart,
+            totalPrice,
+            setTotalPrice,
+            SameProductAddedToCartMod.sameProductAddedToCart,
+            setDisplayCartDashboardQuantity,
+            cartDashboardQuantity,
+            setCartDashboardQuantity
+        ));
+        console.log("Temp Cart Array: ", tempCartArr); // Testing
+
+        removeEmptyProduct(tempCartArr);
+
         setCart(cart.concat(tempCartArr));
         console.log("Real Cart Array: ", cart); // Testing
 
@@ -130,7 +157,7 @@ export const Product = (props) => {
                 {productPlatforms.map((item, index) => <button onClick={platformChoice} key={index}>{item}</button>)}
             </div>
             <div><button onClick={addToBag}>ADD TO BAG</button></div>
-            <div><button>BUY IT NOW</button></div>
+            <div><button onClick={buyItNow}>BUY IT NOW</button></div>
         </div>
     );
 }
