@@ -5,7 +5,7 @@
 // framework more to understand the animate presence. May have something to do with the 'key' attribute. 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import { motion, AnimatePresence } from "framer-motion";
-import { useLocation} from "react-router-dom";
+import { useLocation, Link} from "react-router-dom";
 import { useState } from "react";
 
 // addToBag Variant: non-primitive obj
@@ -24,13 +24,25 @@ export const AddToBag = ({
     setTotalPrice, 
     setDisplayCartDashboardQuantity,
     cartDashboardQuantity,
-    setCartDashboardQuantity}) => {
+    setCartDashboardQuantity,
+    setDisableMainNavigationButtons,
+    setDisableCategoryLinks,
+    setDisableProductLinks,
+    setDisableShopLink,
+    setDisableTitleLink,
+    setDisableProductButtons}) => {
     const [productQuantity, setProductQuantity] = useState(0); // Using state in order for the component to update during the product quantity increase and decrease
     const location = useLocation();
     
     // closeAddToBag(): Closes the add to bag screen.
     function closeCart(){
         setDisplayAddToBag(false);
+        setDisableMainNavigationButtons(false);
+        setDisableCategoryLinks(false);
+        setDisableProductLinks(false);
+        setDisableShopLink(false);
+        setDisableTitleLink(false);
+        setDisableProductButtons(false);
 
         // Remove the cart quantity dashboard if the cart is empty.
         if (cartDashboardQuantity === 0)
@@ -69,6 +81,25 @@ export const AddToBag = ({
         setCartDashboardQuantity(cartDashboardQuantity + 1);
 
         setProductQuantity(obj.quantity);
+    }
+
+    function resetCart(){
+        console.log("Reseting the cart..."); // Testing
+
+        setDisplayAddToBag(false);
+        setDisableMainNavigationButtons(false);
+        setDisableCategoryLinks(false);
+        setDisableProductLinks(false);
+        setDisableShopLink(false);
+        setDisableTitleLink(false);
+        setDisableProductButtons(false);
+
+        setCart([]); // Remove all the products from the cart.
+        
+        setCartDashboardQuantity(0); // Set the cart dashboard quantity back to zero.
+        setDisplayCartDashboardQuantity(false); // Display the default cart. 
+
+        setTotalPrice(0); // Reset the total price. 
     }
 
     return (
@@ -131,8 +162,8 @@ export const AddToBag = ({
                                     </div>)}
 
                                     <div className="checkout-section">
-                                        <button>Checkout</button>
-                                        <p>Total Price: {totalPrice.toFixed(2)}</p>
+                                        <div><Link to="/" onClick={resetCart}>Checkout</Link></div>
+                                        <p>Total Price: ${totalPrice.toFixed(2)}</p>
                                     </div>
                                 </>
                             )}

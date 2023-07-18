@@ -7,11 +7,11 @@ import { ShoppingNavigation } from "./ShoppingNavigation";
 import { GameCategory } from "./GameCategory";
 
 // Shopping(): The Shopping component container.
-export const Shopping = () => {
+export const Shopping = ({disableCategoryLinks, disableProductLinks}) => {
     return (
         <div className="shopping-component-container">
-            <ShoppingNavigation />
-            <GameCategory />
+            <ShoppingNavigation disableCategoryLinks={disableCategoryLinks} />
+            <GameCategory disableProductLinks={disableProductLinks} />
         </div>
     );
 }

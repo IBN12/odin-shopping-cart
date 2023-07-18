@@ -33,7 +33,8 @@ export const Product = (props) => {
             setTotalPrice, 
             setDisplayCartDashboardQuantity,
             cartDashboardQuantity,
-            setCartDashboardQuantity} = props;
+            setCartDashboardQuantity,
+            disableProductButtons} = props;
 
     useEffect(() => {
         SaveProductId.saveProductId = productId;
@@ -153,11 +154,30 @@ export const Product = (props) => {
                     alt={productInfo.name}
                 />
             </div>
-            <div>
+
+            {disableProductButtons ?
+                <>
+                    <div>
+                        {productPlatforms.map((item, index) => <button key={index}>{item}</button>)}
+                    </div>
+                    <div><button>ADD TO BAG</button></div>
+                    <div><button>BUY IT NOW</button></div>
+                </>
+                :
+                <>
+                    <div>
+                        {productPlatforms.map((item, index) => <button onClick={platformChoice} key={index}>{item}</button>)}
+                    </div>
+                    <div><button onClick={addToBag}>ADD TO BAG</button></div>
+                    <div><button onClick={buyItNow}>BUY IT NOW</button></div>
+                </>
+            }
+
+            {/* <div>
                 {productPlatforms.map((item, index) => <button onClick={platformChoice} key={index}>{item}</button>)}
             </div>
             <div><button onClick={addToBag}>ADD TO BAG</button></div>
-            <div><button onClick={buyItNow}>BUY IT NOW</button></div>
+            <div><button onClick={buyItNow}>BUY IT NOW</button></div> */}
         </div>
     );
 }

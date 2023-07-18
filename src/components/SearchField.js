@@ -18,7 +18,17 @@ const searchField = {
 export const SearchField = (props) => {
     const [displaySearchLink, setDisplaySearchLink] = useState(false);
     const [displaySearchNotFound, setDisplaySearchNotFound] = useState(false);
-    const {displaySearchField, setDisplaySearchField, userSearch, setUserSearch} = props;
+    const {
+        displaySearchField, 
+        setDisplaySearchField, 
+        userSearch, 
+        setUserSearch, 
+        setDisableMainNavigationButtons, 
+        setDisableCategoryLinks,
+        setDisableProductLinks,
+        setDisableShopLink,
+        setDisableTitleLink,
+        setDisableProductButtons} = props;
 
     return(
         <AnimatePresence>
@@ -34,6 +44,13 @@ export const SearchField = (props) => {
                     <div>
                         <button onClick={() => {
                             setDisplaySearchField(false);
+                            setDisableMainNavigationButtons(false);
+                            setDisableCategoryLinks(false);
+                            setDisableProductLinks(false);
+                            setDisableShopLink(false);
+                            setDisableTitleLink(false);
+                            setDisableProductButtons(false); 
+                            
                             if (displaySearchLink)
                             {
                                 setDisplaySearchLink(false);
@@ -59,11 +76,8 @@ export const SearchField = (props) => {
 
                             <form onSubmit={e => {
                                 e.preventDefault();
-                                
+
                                 let searchFound = false;
-                                let userSearchArr = [];
-                                let indexArr = [];
-                                let userSearchCopy = "";
 
                                 if (displaySearchLink)
                                 {
@@ -73,63 +87,44 @@ export const SearchField = (props) => {
                                 {
                                     setDisplaySearchNotFound(false);
                                 }
-
-                                // Convert items to the matching names in the system. 
-                                for(let i = 0; i < userSearch.length; i++)
-                                {
-                                    if (userSearch[i] === userSearch[0].toLowerCase() || userSearch[i] === userSearch[0].toUpperCase())
-                                    {
-                                        console.log(userSearch[i]); // Testing
-                                        userSearchArr.push(userSearch[i].toUpperCase());
-                                        console.log("User Search Array: ", userSearchArr); // Testing
-                                    }
-                                    else if (userSearch[i].includes(' '))
-                                    {
-                                        userSearchArr.push(userSearch[i]);
-                                        indexArr.push(userSearch[i + 1].toUpperCase());
-                                        console.log("Index Array: ", indexArr); // Testing
-                                    }
-                                    else if (userSearch[i] === userSearch[i].toUpperCase() || userSearch[i] === userSearch[i].toLowerCase())
-                                    {
-                                        userSearchArr.push(userSearch[i].toLowerCase());
-                                        console.log("User Search Array: ", userSearchArr); // Testing
-                                    }
-                                }
-
-                                // Replace the matching userSearchArr items with the items from indexArr:
-                                userSearchArr.forEach((item, index) => {
-                                    if (item === ' ')
-                                    {
-                                        console.log(userSearchArr[index + 1]);
-                                        indexArr.forEach((indexItem) => {
-                                            if (indexItem === userSearchArr[index + 1].toUpperCase())
-                                            {
-                                                userSearchArr[index + 1] = indexItem;
-                                            }
-                                        });
-                                    }
-                                });
-
-                                // convert userSearchArr to a string:
-                                userSearchCopy = userSearchArr.toString();
-                                userSearchCopy = userSearchCopy.replaceAll(',', '');
-
-                                // Test if the user search item is in the system:
+                                
+                                // Search algorithm to find a specific matching product. 
                                 games.forEach((obj, index) => {
-                                    if (obj.name === userSearchCopy)
-                                    {
-                                        console.log(userSearchCopy, " is in the system."); // Testing
-                                        setUserSearch(userSearchCopy);
-                                        setDisplaySearchLink(true);
+                                    let strName = obj.name;
+                                    let match = 0;
+                                    let noMatch = 0;
 
+                                    console.log(strName); // Testing
+
+                                    for (let i = 0; i < userSearch.length; i++){
+                                        if ((strName.includes(userSearch[i].toLowerCase()) || strName.includes(userSearch[i].toUpperCase())))
+                                        {
+                                            match++;
+                                        }
+                                        else
+                                        {
+                                            noMatch++;
+                                        }
+                                    }
+                                    console.log("Match: ", match); // Testing
+                                    console.log("No Match: ", noMatch); // Testing
+                                    
+                                    if (match === strName.length && noMatch === 0) // Perfect Match
+                                    {
+                                        console.log("Perfect Match: ", strName); // Testing
+                                        console.log(strName, " is in the system."); // Testing
+                                        setUserSearch(strName);
+                                        setDisplaySearchLink(true);
                                         searchFound = true;
                                     }
-
+                                    
                                     if (games.length - 1 === index && !searchFound)
                                     {
                                         setDisplaySearchNotFound(true);
                                     }
-                                }); }}>
+                                    console.log("\n"); // Testing
+                                });
+                                }}>
 
                                 <input type="text" placeholder="Search" onChange={e => {
                                     setUserSearch(e.target.value);

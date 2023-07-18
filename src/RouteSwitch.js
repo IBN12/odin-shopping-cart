@@ -28,6 +28,14 @@ export const RouteSwitch = () => {
     const [displayCartDashboardQuantity, setDisplayCartDashboardQuantity] = useState(false);
     const [cartDashboardQuantity, setCartDashboardQuantity] = useState(0);
 
+    const [disableMainNavigationButtons, setDisableMainNavigationButtons] = useState(false);
+    const [disableCategoryLinks, setDisableCategoryLinks] = useState(false); // This is the next task to implement when you work on this application. 
+    const [disableProductLinks, setDisableProductLinks] = useState(false); 
+    const [disableShopLink, setDisableShopLink] = useState(false);
+    const [disableTitleLink, setDisableTitleLink] = useState(false);
+
+    const [disableProductButtons, setDisableProductButtons] = useState(false); 
+
     return (
         <HashRouter>
             <MainNavigation
@@ -35,6 +43,17 @@ export const RouteSwitch = () => {
                 setDisplaySearchField={setDisplaySearchField}
                 cartDashboardQuantity={cartDashboardQuantity}
                 displayCartDashboardQuantity={displayCartDashboardQuantity}
+                disableMainNavigationButtons={disableMainNavigationButtons}
+
+                setDisableMainNavigationButtons={setDisableMainNavigationButtons}
+                setDisableCategoryLinks={setDisableCategoryLinks}
+                setDisableProductLinks={setDisableProductLinks}
+                disableShopLink={disableShopLink}
+                setDisableShopLink={setDisableShopLink}
+                disableTitleLink={disableTitleLink}
+                setDisableTitleLink={setDisableTitleLink}
+
+                setDisableProductButtons={setDisableProductButtons}
             />
 
             <SearchField
@@ -42,6 +61,14 @@ export const RouteSwitch = () => {
                 setDisplaySearchField={setDisplaySearchField}
                 userSearch={userSearch}
                 setUserSearch={setUserSearch}
+
+                setDisableMainNavigationButtons={setDisableMainNavigationButtons}
+                setDisableCategoryLinks={setDisableCategoryLinks}
+                setDisableProductLinks={setDisableProductLinks}
+                setDisableShopLink={setDisableShopLink}
+                setDisableTitleLink={setDisableTitleLink}
+
+                setDisableProductButtons={setDisableProductButtons}
             />
 
             <AddToBag 
@@ -54,12 +81,20 @@ export const RouteSwitch = () => {
                 setDisplayCartDashboardQuantity={setDisplayCartDashboardQuantity}
                 cartDashboardQuantity={cartDashboardQuantity}
                 setCartDashboardQuantity={setCartDashboardQuantity}
+
+                setDisableMainNavigationButtons={setDisableMainNavigationButtons}
+                setDisableCategoryLinks={setDisableCategoryLinks}
+                setDisableProductLinks={setDisableProductLinks}
+                setDisableShopLink={setDisableShopLink}
+                setDisableTitleLink={setDisableTitleLink}
+
+                setDisableProductButtons={setDisableProductButtons}
             />
 
             <Routes>
                 <Route path="/" element={<App />} />
 
-                <Route path="/shop" element={<Shopping />}>
+                <Route path="/shop" element={<Shopping disableCategoryLinks={disableCategoryLinks} disableProductLinks={disableProductLinks} />}>
                     {/* <Route index element={<Shopping />} />  */}
                     <Route path=":categoryId" element={<GameCategory />} />
                 </Route>
@@ -75,6 +110,8 @@ export const RouteSwitch = () => {
                         setDisplayCartDashboardQuantity={setDisplayCartDashboardQuantity}
                         cartDashboardQuantity={cartDashboardQuantity}
                         setCartDashboardQuantity={setCartDashboardQuantity}
+
+                        disableProductButtons={disableProductButtons}
                     />} 
                 />
             </Routes>
