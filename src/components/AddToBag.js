@@ -84,8 +84,6 @@ export const AddToBag = ({
     }
 
     function resetCart(){
-        console.log("Reseting the cart..."); // Testing
-
         setDisplayAddToBag(false);
         setDisableMainNavigationButtons(false);
         setDisableCategoryLinks(false);
@@ -134,7 +132,7 @@ export const AddToBag = ({
 
                         <div>
                             {cart.length === 0 && (
-                                <div>Your Cart Is Empty</div>
+                                <div className="empty-cart">Your Cart Is Empty</div>
                             )}
 
                             {cart.length > 0 && (

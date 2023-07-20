@@ -37,7 +37,7 @@ export const RouteSwitch = () => {
     const [disableProductButtons, setDisableProductButtons] = useState(false); 
 
     return (
-        <HashRouter>
+        <HashRouter  >
             <MainNavigation
                 setDisplayAddToBag={setDisplayAddToBag}
                 setDisplaySearchField={setDisplaySearchField}
@@ -95,7 +95,6 @@ export const RouteSwitch = () => {
                 <Route path="/" element={<App />} />
 
                 <Route path="/shop" element={<Shopping disableCategoryLinks={disableCategoryLinks} disableProductLinks={disableProductLinks} />}>
-                    {/* <Route index element={<Shopping />} />  */}
                     <Route path=":categoryId" element={<GameCategory />} />
                 </Route>
 

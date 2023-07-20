@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { grabProductInfo } from "../utils/grabProductInfo";
 import { grabProductPlatforms } from "../utils/grabProductPlatform";
-import { SaveProductId } from "../utils/save";
 import { addProductsToCart } from "../utils/addProductsToCart";
 import { removeEmptyProduct } from "../utils/removeEmptyProduct";
 
@@ -37,8 +36,7 @@ export const Product = (props) => {
             disableProductButtons} = props;
 
     useEffect(() => {
-        SaveProductId.saveProductId = productId;
-        console.log("You are viewing the product: ",productId); // Testing
+        // SaveProductId.saveProductId = productId;
 
         const tempProductInfo = Object.assign({}, grabProductInfo(productId));
 
@@ -55,13 +53,10 @@ export const Product = (props) => {
             } 
         }
 
-        console.log("Items in Cart: ",cart.length); // Testing 
-
         // Test if the user is adding the same the product to the cart.
         cart.forEach((obj) => {
             if (obj.name === productId)
             {
-                console.log(obj.name, " is in the cart"); // Testing
                 SameProductAddedToCartMod.sameProductAddedToCart = true;
             }
             else
@@ -74,7 +69,6 @@ export const Product = (props) => {
 
     function platformChoice(e){
         const productPlatformsContainer = document.querySelectorAll('.product-component-container > div:nth-child(3) > button');
-        console.log(e.target.innerHTML); // Testing
 
         setProductPlatformClicked(true);
 
@@ -93,8 +87,6 @@ export const Product = (props) => {
     }
 
     function addToBag(){
-        console.log("Adding Product To Bag."); // Testing
-
         let tempCartArr = [];
 
         tempCartArr.push(addProductsToCart(
@@ -107,21 +99,14 @@ export const Product = (props) => {
             setDisplayCartDashboardQuantity,
             cartDashboardQuantity,
             setCartDashboardQuantity
-            ));
-        console.log("Temp Cart Array: ", tempCartArr);  // Testing
+        ));
 
         removeEmptyProduct(tempCartArr);
 
-        // setCart(cart.concat(addProductsToCart(productId, saveProductPlatform, cart, differentGameAddedToCart, setNoProductReturned)));
         setCart(cart.concat(tempCartArr));
-        console.log("Real Cart Array: ", cart); // Testing
-
-        // setDisplayAddToBag(true);
     }
 
     function buyItNow(){
-        console.log("Buying The Product Now."); // Testing
-
         let tempCartArr = [];
 
         tempCartArr.push(addProductsToCart(
@@ -135,12 +120,10 @@ export const Product = (props) => {
             cartDashboardQuantity,
             setCartDashboardQuantity
         ));
-        console.log("Temp Cart Array: ", tempCartArr); // Testing
 
         removeEmptyProduct(tempCartArr);
 
         setCart(cart.concat(tempCartArr));
-        console.log("Real Cart Array: ", cart); // Testing
 
         setDisplayAddToBag(true);
     }
@@ -172,12 +155,6 @@ export const Product = (props) => {
                     <div><button onClick={buyItNow}>BUY IT NOW</button></div>
                 </>
             }
-
-            {/* <div>
-                {productPlatforms.map((item, index) => <button onClick={platformChoice} key={index}>{item}</button>)}
-            </div>
-            <div><button onClick={addToBag}>ADD TO BAG</button></div>
-            <div><button onClick={buyItNow}>BUY IT NOW</button></div> */}
         </div>
     );
 }

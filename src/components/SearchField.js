@@ -94,8 +94,6 @@ export const SearchField = (props) => {
                                     let match = 0;
                                     let noMatch = 0;
 
-                                    console.log(strName); // Testing
-
                                     for (let i = 0; i < userSearch.length; i++){
                                         if ((strName.includes(userSearch[i].toLowerCase()) || strName.includes(userSearch[i].toUpperCase())))
                                         {
@@ -106,13 +104,9 @@ export const SearchField = (props) => {
                                             noMatch++;
                                         }
                                     }
-                                    console.log("Match: ", match); // Testing
-                                    console.log("No Match: ", noMatch); // Testing
                                     
                                     if (match === strName.length && noMatch === 0) // Perfect Match
                                     {
-                                        console.log("Perfect Match: ", strName); // Testing
-                                        console.log(strName, " is in the system."); // Testing
                                         setUserSearch(strName);
                                         setDisplaySearchLink(true);
                                         searchFound = true;
@@ -122,7 +116,6 @@ export const SearchField = (props) => {
                                     {
                                         setDisplaySearchNotFound(true);
                                     }
-                                    console.log("\n"); // Testing
                                 });
                                 }}>
 
