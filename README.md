@@ -14,3 +14,6 @@ The user may also search for the game in the search field to avoid navigating th
 <div><img src="./src/images/git/odin-shopping-cart-homepage.png" /></div>
 <br />
 <div><img src="./src/images/git/Screenshot (4).png"></div>
+
+## Live Demo
+[THE GAME STORE](https://ibn12.github.io/odin-shopping-cart/)
