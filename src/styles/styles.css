@@ -667,6 +667,7 @@ body{
         gap: 90px;
 
         padding: 10px;
+        margin: 0;
     }
     .game-category-component-container > div > a{ /* Games */
         height: 200px;
